@@ -1,0 +1,3 @@
+// @flow
+export * from '../../src/browser-module/index.js';
+export { default } from '../../src/browser-module/index.js';

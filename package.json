@@ -1,0 +1,45 @@
+{
+  "name": "dist-flow-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.59.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.52.0",
+    "rollup-plugin-babel": "^3.0.2"
+  },
+  "files": ["dist", "src", "!__mocks__", "!__tests__"],
+  "scripts": {
+    "prebuild": "rimraf dist && mkdir dist",
+    "build": "npm run build:node && npm run build:browser",
+    "build:node":
+      "babel src/node-module --out-dir dist/node-module --copy-files --ignore __tests__,__mocks__",
+    "postbuild:node":
+      "flow gen-flow-files src/node-module --out-dir dist/node-module",
+    "build:browser": "rollup --config",
+    "postbuild:browser":
+      "echo \"// @flow\nexport * from '../../src/browser-module/index.js';\nexport { default } from '../../src/browser-module/index.js';\" > ./dist/browser-module/my-lib.js.flow"
+  },
+  "keywords": [],
+  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "flow"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+// @flow
+
+declare export function divide(...args: Array<number>): number | number | number;
+declare export function multiply(...args: Array<number>): number | number | number;
+declare export function subtract(...args: Array<number>): number | number | number;
+declare export function sum(...args: Array<number>): number | number | number;
